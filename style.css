@@ -339,3 +339,11 @@ h1 {
 a { color: var(--azure); text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .link { color: var(--azure); font-size: 13px; }
+/* Luxury depth */
+.hero-card, .tile, .report {
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+.hero-card {
+  border-color: rgba(216,210,198,0.9);
+}
+
