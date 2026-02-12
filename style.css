@@ -386,6 +386,59 @@ a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .hero-card {
   transition: 0.4s ease;
 }
+/* =====================
+   Floating Architectural Elements
+===================== */
+
+.floating-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -3;
+  overflow: hidden;
+}
+
+.float {
+  position: absolute;
+  border: 1px solid rgba(38,64,47,0.15);
+  transform: rotate(45deg);
+  animation: drift 18s ease-in-out infinite alternate;
+}
+
+.float-1 {
+  width: 220px;
+  height: 220px;
+  top: 15%;
+  left: 8%;
+  border-color: rgba(209,154,0,0.18);
+}
+
+.float-2 {
+  width: 140px;
+  height: 140px;
+  bottom: 20%;
+  right: 12%;
+  border-color: rgba(0,85,138,0.15);
+  animation-duration: 22s;
+}
+
+.float-3 {
+  width: 300px;
+  height: 300px;
+  bottom: 5%;
+  left: 40%;
+  border-color: rgba(38,64,47,0.08);
+  animation-duration: 26s;
+}
+
+@keyframes drift {
+  from {
+    transform: rotate(45deg) translateY(0px);
+  }
+  to {
+    transform: rotate(45deg) translateY(-40px);
+  }
+}
 
 .hero-card:hover {
   transform: translateY(-6px);
