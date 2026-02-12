@@ -346,4 +346,5 @@ a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .hero-card {
   border-color: rgba(216,210,198,0.9);
 }
+.nav a { letter-spacing: 0.2px; }
 
