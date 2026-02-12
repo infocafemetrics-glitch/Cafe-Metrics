@@ -1,88 +1,58 @@
-<style>
-/* ============================================================
-   ULTRA-PREMIUM ARCHITECTURAL LAYER
-   ============================================================ */
-:root {
-  --gold-accent: rgba(209,154,0,0.25);
-  --deep-green: rgba(38,64,47,0.12);
-  --soft-blue: rgba(0,85,138,0.18);
-}
+/* =====================
+   Floating Architectural Elements (Guaranteed Visible)
+===================== */
 
 .floating-layer {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
+  z-index: 0; /* visible */
+  opacity: 0.85;
+  mix-blend-mode: multiply;
 }
 
-/* المان ۱: مربع طلایی شناور (سمت چپ بالا) */
-.float-1 {
+.float {
   position: absolute;
-  width: 220px;
-  height: 220px;
-  top: 10%;
-  left: 5%;
-  border: 0.8px solid var(--gold-accent);
-  background: linear-gradient(145deg, rgba(209,154,0,0.05), transparent);
+  border: 1px solid rgba(38,64,47,0.18);
+  background: radial-gradient(circle at 30% 30%, rgba(209,154,0,0.06), transparent 58%);
   transform: rotate(45deg);
-  backdrop-filter: blur(2px);
-  animation: floatMaster 15s ease-in-out infinite alternate;
+  animation: drift 16s ease-in-out infinite alternate;
+  filter: blur(0.2px);
 }
 
-/* المان ۲: مستطیل کشیده پایین */
+.float-1 {
+  width: 240px;
+  height: 240px;
+  top: 16%;
+  left: 8%;
+  border-color: rgba(209,154,0,0.24);
+}
+
 .float-2 {
-  position: absolute;
-  width: 120px;
-  height: 300px;
-  bottom: -50px;
-  right: 12%;
-  border-left: 0.5px solid var(--soft-blue);
-  background: linear-gradient(to top, rgba(0,85,138,0.03), transparent);
-  transform: rotate(-10deg);
-  animation: floatMaster 22s ease-in-out infinite alternate-reverse;
+  width: 170px;
+  height: 170px;
+  bottom: 20%;
+  right: 10%;
+  border-color: rgba(0,85,138,0.20);
+  animation-duration: 20s;
 }
 
-/* خطوط راهنمای عمودی */
-.floating-layer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 15%;
-  width: 1px;
-  height: 100%;
-  background: linear-gradient(to bottom, transparent, var(--deep-green), transparent);
-  opacity: 0.4;
+.float-3 {
+  width: 330px;
+  height: 330px;
+  bottom: 6%;
+  left: 44%;
+  border-color: rgba(38,64,47,0.10);
+  animation-duration: 24s;
 }
 
-/* هاله نوری لوکس */
-.floating-layer::after {
-  content: '';
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  top: -100px;
-  right: -50px;
-  background: radial-gradient(circle, rgba(209,154,0,0.08) 0%, transparent 70%);
+@keyframes drift {
+  from { transform: rotate(45deg) translateY(0px); }
+  to   { transform: rotate(45deg) translateY(-46px); }
 }
 
-@keyframes floatMaster {
-  0% { transform: rotate(45deg) translate(0, 0); }
-  50% { transform: rotate(48deg) translate(20px, -20px); }
-  100% { transform: rotate(42deg) translate(-10px, 10px); }
-}
-
-/* لایه‌بندی محتوا برای جلوگیری از رفتن زیر المان‌ها */
-.site-header, main, footer, section {
+/* Keep content above floating shapes */
+.site-header, main, footer {
   position: relative;
-  z-index: 10;
+  z-index: 2;
 }
-</style>
-
-<div class="floating-layer">
-    <div class="float float-1"></div>
-    <div class="float float-2"></div>
-</div>
