@@ -45,18 +45,40 @@ h1, h2, h3 {
 }
 
 /* ==========
-   Background Motif
+   Background Motif (Persian Girih - subtle)
 ========== */
 
 .bg-motif {
   position: fixed;
-  top: -200px;
-  right: -200px;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle at center, rgba(38,64,47,0.06), transparent 70%);
+  top: -140px;
+  right: -140px;
+  width: 620px;
+  height: 620px;
+  pointer-events: none;
   z-index: -1;
+  opacity: 0.55;
+  filter: blur(0.0px);
+  transform: rotate(8deg);
 }
+
+.motif {
+  width: 100%;
+  height: 100%;
+}
+
+/* extra calm glow */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -200px;
+  background:
+    radial-gradient(900px 520px at 15% 10%, rgba(209,154,0,0.08), transparent 60%),
+    radial-gradient(800px 500px at 85% 20%, rgba(0,85,138,0.06), transparent 58%),
+    radial-gradient(700px 520px at 50% 95%, rgba(38,64,47,0.05), transparent 60%);
+  pointer-events: none;
+  z-index: -2;
+}
+
 
 /* ==========
    Header
