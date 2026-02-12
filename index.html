@@ -1,1 +1,786 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Cafe Metrics</title><style>body{margin:0;padding:0;font-family:sans-serif;}header{background-color:#333;color:#fff;padding:1rem;}h1{margin:0;}footer{background-color:#333;color:#fff;padding:1rem;position:fixed;left:0;bottom:0;width:100%;}</style></head><body><header><h1>Welcome to Cafe Metrics</h1></header><main><section><h2>Performance Metrics</h2><p>Your content goes here.</p></section></main><footer><p>&copy; 2026 Cafe Metrics</p></footer></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cafe Metrics - Real-time analytics and insights for your coffee business">
+  <meta name="theme-color" content="#26402F">
+  <title>Cafe Metrics - Coffee Shop Analytics & Insights</title>
+  
+  <!-- Preload critical fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  
+  <!-- Google Fonts with font-display swap for better performance -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Source+Serif+4:wght@600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --forest: #26402F;
+      --azure: #00558A;
+      --gold: #D19A00;
+      --turquoise: #1F8C9C;
+      --bg: #F4F1EA;
+      --stone: #E9E3D8;
+      --text-dark: #1E1E1E;
+      --text-soft: #6B6B6B;
+      --line: #D8D2C6;
+      --transition: 0.25s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: "Source Serif 4", Georgia, serif;
+      font-weight: 600;
+      letter-spacing: -0.6px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Background Effects */
+    .ambient {
+      position: fixed;
+      inset: -200px;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(900px 520px at 18% 10%, rgba(209, 154, 0, 0.07), transparent 60%), radial-gradient(820px 520px at 86% 18%, rgba(0, 85, 138, 0.06), transparent 58%), radial-gradient(700px 520px at 50% 95%, rgba(38, 64, 47, 0.05), transparent 60%);
+    }
+
+    .bg-motif {
+      position: fixed;
+      top: -140px;
+      right: -140px;
+      width: 620px;
+      height: 620px;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.55;
+      transform: rotate(8deg);
+    }
+
+    .motif {
+      width: 100%;
+      height: 100%;
+    }
+
+    .floating-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.9;
+      mix-blend-mode: multiply;
+    }
+
+    .float {
+      position: absolute;
+      border: 1px solid rgba(38, 64, 47, 0.18);
+      background: radial-gradient(circle at 30% 30%, rgba(209, 154, 0, 0.06), transparent 58%);
+      transform: rotate(45deg);
+      animation: drift 16s ease-in-out infinite alternate;
+      filter: blur(0.2px);
+      will-change: transform;
+    }
+
+    .float-1 {
+      width: 240px;
+      height: 240px;
+      top: 16%;
+      left: 7%;
+      border-color: rgba(209, 154, 0, 0.24);
+      animation-duration: 18s;
+    }
+
+    .float-2 {
+      width: 170px;
+      height: 170px;
+      bottom: 18%;
+      right: 10%;
+      border-color: rgba(0, 85, 138, 0.2);
+      animation-duration: 22s;
+    }
+
+    .float-3 {
+      width: 330px;
+      height: 330px;
+      bottom: 6%;
+      left: 44%;
+      border-color: rgba(38, 64, 47, 0.1);
+      animation-duration: 26s;
+    }
+
+    .float-line {
+      position: absolute;
+      height: 1px;
+      background: rgba(38, 64, 47, 0.12);
+      width: 420px;
+      transform: rotate(-12deg);
+      animation: lineDrift 20s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+
+    .line-1 {
+      top: 22%;
+      left: 52%;
+      background: rgba(0, 85, 138, 0.1);
+    }
+
+    .line-2 {
+      bottom: 14%;
+      left: 14%;
+      width: 520px;
+      background: rgba(209, 154, 0, 0.1);
+      animation-duration: 26s;
+    }
+
+    @keyframes drift {
+      from {
+        transform: rotate(45deg) translateY(0);
+      }
+      to {
+        transform: rotate(45deg) translateY(-46px);
+      }
+    }
+
+    @keyframes lineDrift {
+      from {
+        transform: rotate(-12deg) translateX(0);
+      }
+      to {
+        transform: rotate(-12deg) translateX(60px);
+      }
+    }
+
+    /* Content Layers */
+    .site-header, main, footer {
+      position: relative;
+      z-index: 5;
+    }
+
+    /* Header */
+    .site-header {
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      background: rgba(244, 241, 234, 0.75);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--forest);
+      transition: var(--transition);
+    }
+
+    .brand:hover {
+      opacity: 0.8;
+    }
+
+    .brand-mark {
+      width: 14px;
+      height: 14px;
+      background: var(--gold);
+      margin-right: 12px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .brand-tag {
+      display: block;
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-top: 2px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-size: 14px;
+      letter-spacing: 0.2px;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav a:hover {
+      color: var(--azure);
+    }
+
+    .nav-cta {
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 2px;
+      font-weight: 600;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 96px 0;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .kicker {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 22px;
+      line-height: 1.15;
+      letter-spacing: -1px;
+    }
+
+    .lead {
+      color: var(--text-soft);
+      max-width: 520px;
+      margin-bottom: 30px;
+      font-size: 16px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 2px solid var(--forest);
+      border-radius: 4px;
+      transition: var(--transition);
+      margin-right: 15px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn.primary {
+      background: var(--forest);
+      color: white;
+    }
+
+    .btn.primary:hover {
+      background: var(--azure);
+      border-color: var(--azure);
+      box-shadow: 0 8px 24px rgba(0, 85, 138, 0.15);
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--forest);
+    }
+
+    .btn.ghost:hover {
+      background: var(--forest);
+      color: white;
+    }
+
+    /* Hero Card */
+    .hero-card {
+      background: white;
+      border: 1px solid rgba(216, 210, 198, 0.9);
+      border-radius: 8px;
+      padding: 40px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.06);
+      transition: var(--transition);
+    }
+
+    .hero-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.085);
+    }
+
+    .card-head .pill {
+      font-size: 11px;
+      color: var(--gold);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 700;
+    }
+
+    .card-title {
+      font-weight: 600;
+      margin-bottom: 5px;
+      font-size: 18px;
+    }
+
+    .card-sub {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 20px;
+    }
+
+    .mini-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .num {
+      font-weight: 700;
+      color: var(--forest);
+      font-size: 24px;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--line);
+      margin: 20px 0;
+    }
+
+    .note {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .card-links {
+      margin-top: 14px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    a {
+      color: var(--azure);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--azure);
+      outline-offset: 2px;
+    }
+
+    .link {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* Sections */
+    .section {
+      padding: 92px 0;
+    }
+
+    .section.alt {
+      background: var(--stone);
+    }
+
+    .section-head {
+      margin-bottom: 48px;
+    }
+
+    .section-head h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .section-head p {
+      color: var(--text-soft);
+      font-size: 16px;
+    }
+
+    /* Grid System */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+    }
+
+    .tile {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.04);
+      transition: var(--transition);
+    }
+
+    .tile:hover {
+      border-color: rgba(38, 64, 47, 0.45);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    .tile h3 {
+      margin-bottom: 12px;
+      font-size: 18px;
+    }
+
+    .tile p {
+      font-size: 14px;
+      color: var(--text-soft);
+      margin-bottom: 15px;
+    }
+
+    .tile-link {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* Reports */
+    .report-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    .report {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 26px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.04);
+      transition: var(--transition);
+    }
+
+    .report:hover {
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    .report-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .report-title {
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .report-tag {
+      font-size: 12px;
+      color: var(--text-soft);
+      border-bottom: 1px solid rgba(209, 154, 0, 0.6);
+      padding-bottom: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    .report-list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      margin: 12px 0 16px;
+    }
+
+    .report-list li {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+    }
+
+    .report-link {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--line);
+      background: rgba(244, 241, 234, 0.85);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .foot-sub {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .footer a {
+      color: var(--text-soft);
+      font-size: 13px;
+      margin-left: 20px;
+      transition: var(--transition);
+    }
+
+    .footer a:hover {
+      color: var(--forest);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .bg-motif {
+        opacity: 0.35;
+      }
+
+      .floating-layer {
+        opacity: 0.55;
+      }
+
+      .hero {
+        padding: 60px 0;
+      }
+
+      .section {
+        padding: 60px 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 28px;
+      }
+
+      .hero {
+        padding: 48px 0;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        font-size: 13px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+
+      .section {
+        padding: 48px 0;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .report-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Elements -->
+  <div class="ambient"></div>
+  <div class="bg-motif">
+    <svg class="motif" viewBox="0 0 620 620" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Persian motif SVG content goes here -->
+    </svg>
+  </div>
+  
+  <div class="floating-layer">
+    <div class="float float-1"></div>
+    <div class="float float-2"></div>
+    <div class="float float-3"></div>
+    <div class="float-line line-1"></div>
+    <div class="float-line line-2"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="#home" class="brand" title="Cafe Metrics - Home">
+          <div class="brand-mark"></div>
+          <div>
+            <div class="brand-name">Cafe Metrics</div>
+            <span class="brand-tag">Analytics & Insights</span>
+          </div>
+        </a>
+        <nav class="nav" role="navigation" aria-label="Main navigation">
+          <a href="#features">Features</a>
+          <a href="#reports">Reports</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#contact" class="nav-cta">Get Started</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main role="main">
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="kicker">Welcome to Cafe Metrics</div>
+            <h1>Understand Your Coffee Business</h1>
+            <p class="lead">Real-time analytics, customer insights, and growth strategies tailored for cafes of all sizes.</p>
+            <div>
+              <a href="#" class="btn primary">Start Free Trial</a>
+              <a href="#" class="btn ghost">Learn More</a>
+            </div>
+          </div>
+          <article class="hero-card">
+            <header class="card-head">
+              <div class="pill">KEY METRIC</div>
+              <h2 class="card-title">Daily Revenue</h2>
+              <p class="card-sub">Average across all locations</p>
+            </header>
+            <div class="mini-row">
+              <span class="num">$4,285</span>
+              <span class="note">↑ 12% from last week</span>
+            </div>
+            <div class="divider"></div>
+            <p class="note">Updated 2 hours ago</p>
+            <div class="card-links">
+              <a href="#" class="link">View Details</a>
+              <a href="#" class="link">Export Report</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" id="features">
+      <div class="container">
+        <header class="section-head">
+          <h2>Powerful Features</h2>
+          <p>Everything you need to run and grow your cafe</p>
+        </header>
+        <div class="grid">
+          <article class="tile">
+            <h3>📊 Real-Time Analytics</h3>
+            <p>Track sales, customer traffic, and trends as they happen.</p>
+            <a href="#" class="tile-link">Learn more →</a>
+          </article>
+          <article class="tile">
+            <h3>👥 Customer Insights</h3>
+            <p>Understand buying patterns and loyalty metrics.</p>
+            <a href="#" class="tile-link">Learn more →</a>
+          </article>
+          <article class="tile">
+            <h3>💰 Revenue Optimization</h3>
+            <p>Identify top products and peak hours for maximum profit.</p>
+            <a href="#" class="tile-link">Learn more →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reports Section -->
+    <section class="section alt" id="reports">
+      <div class="container">
+        <header class="section-head">
+          <h2>Monthly Reports</h2>
+          <p>Detailed insights and actionable recommendations</p>
+        </header>
+        <div class="report-grid">
+          <article class="report">
+            <header class="report-top">
+              <h3 class="report-title">January 2026</h3>
+              <span class="report-tag">Completed</span>
+            </header>
+            <ul class="report-list">
+              <li><span>Total Revenue</span> <span>$125,400</span></li>
+              <li><span>Customer Count</span> <span>8,240</span></li>
+              <li><span>Avg. Transaction</span> <span>$15.20</span></li>
+            </ul>
+            <a href="#" class="report-link">View Full Report →</a>
+          </article>
+          <article class="report">
+            <header class="report-top">
+              <h3 class="report-title">December 2025</h3>
+              <span class="report-tag">Completed</span>
+            </header>
+            <ul class="report-list">
+              <li><span>Total Revenue</span> <span>$118,900</span></li>
+              <li><span>Customer Count</span> <span>7,890</span></li>
+              <li><span>Avg. Transaction</span> <span>$15.08</span></li>
+            </ul>
+            <a href="#" class="report-link">View Full Report →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <p class="foot-sub">&copy; 2026 Cafe Metrics. All rights reserved.</p>
+        <div>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
