@@ -379,3 +379,12 @@ a:hover { text-decoration: underline; text-underline-offset: 4px; }
   z-index: 1000;
 }
 
+/* Hero Card Premium Lift */
+.hero-card {
+  transition: 0.4s ease;
+}
+
+.hero-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.08);
+}
