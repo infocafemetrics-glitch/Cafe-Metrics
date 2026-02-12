@@ -369,4 +369,13 @@ a:hover { text-decoration: underline; text-underline-offset: 4px; }
   border-color: rgba(216,210,198,0.9);
 }
 .nav a { letter-spacing: 0.2px; }
+/* Glass Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(8px);
+  background: rgba(244,241,234,0.75);
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  z-index: 1000;
+}
 
