@@ -335,3 +335,7 @@ h1 {
     display: none;
   }
 }
+/* Links polish */
+a { color: var(--azure); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.link { color: var(--azure); font-size: 13px; }
